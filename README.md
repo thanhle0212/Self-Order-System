@@ -1,4 +1,4 @@
-# InstantPOS
+# Self Order System
 
 Architecture
 - Clean Architecture
