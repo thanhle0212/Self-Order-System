@@ -6,16 +6,14 @@ using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.CommandHandler
 {
-    public class CreateProductTypeCommandHandler : IRequestHandler<CreateProductTypeCommand, bool>
+    public class CreateProductTypeCommandHandler : BaseProductTypeHandler, IRequestHandler<CreateProductTypeCommand, bool>
     {
-        private readonly IProductTypeDataService _productTypeDataService;
-        public CreateProductTypeCommandHandler(IProductTypeDataService productTypeDataService)
+        public CreateProductTypeCommandHandler(IProductTypeDataService productTypeDataService): base(productTypeDataService)
         {
-            _productTypeDataService = productTypeDataService;
         }
         public async Task<bool> Handle(CreateProductTypeCommand request, CancellationToken cancellationToken)
         {
-            var result = await _productTypeDataService.CreateProductType(request);
+            var result = await base._productTypeDataService.CreateProductType(request);
             return result;
         }
     }

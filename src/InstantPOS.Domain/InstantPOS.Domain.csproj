@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Enums\" />
-    <Folder Include="Models\" />
+    <Folder Include="Entities\" />
     <Folder Include="Common\" />
   </ItemGroup>
 </Project>

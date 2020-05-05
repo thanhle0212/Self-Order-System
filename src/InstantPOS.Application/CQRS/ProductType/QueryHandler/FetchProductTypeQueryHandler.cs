@@ -4,20 +4,28 @@ using System.Threading;
 using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Query;
 using InstantPOS.Application.Interfaces.DatabaseServices;
+using InstantPOS.Application.DTOs;
 using MediatR;
+using AutoMapper;
 
 namespace InstantPOS.Application.CQRS.ProductType.QueryHandler
 {
-    public class FetchProductTypeQueryHandler : IRequestHandler<FetchProductTypeQuery, IEnumerable<Models.ProductType>>
+    public class FetchProductTypeQueryHandler : IRequestHandler<FetchProductTypeQuery, IEnumerable<ProductTypeDto>>
     {
         private readonly IProductTypeDataService _productTypeDataService;
-        public FetchProductTypeQueryHandler(IProductTypeDataService productTypeDataService)
+        private readonly IMapper _mapper;
+
+        public FetchProductTypeQueryHandler(IProductTypeDataService productTypeDataService, IMapper mapper)
         {
             _productTypeDataService = productTypeDataService;
+            _mapper = mapper;
         }
-        public async Task<IEnumerable<Models.ProductType>> Handle(FetchProductTypeQuery request, CancellationToken cancellationToken)
+
+        public async Task<IEnumerable<ProductTypeDto>> Handle(FetchProductTypeQuery request, CancellationToken cancellationToken)
         {
-            return await _productTypeDataService.FetchProductType(request);
+            var result = await _productTypeDataService.FetchProductType(request);
+
+            return _mapper.Map< IEnumerable<InstantPOS.Domain.Entities.ProductType>, IEnumerable<ProductTypeDto>>(result);
         }
     }
 }
