@@ -11,7 +11,7 @@ Backend technology stacks
 - Swagger
 
 Front-end 
-- Blazor
+- Blazor (comming soon)
 
 Design Patterns
 - CQRS
