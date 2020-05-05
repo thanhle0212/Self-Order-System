@@ -1,5 +1,5 @@
 ﻿using System;
-namespace InstantPOS.Application.Common
+namespace InstantPOS.Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {

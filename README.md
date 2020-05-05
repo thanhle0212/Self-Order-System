@@ -3,11 +3,12 @@
 Architecture
 - Clean Architecture
 
-Backend technology stacks
+Backend technology stack
 - ASP .NET Core 3.1
 - Dapper (Micro ORM)
-- SQLKata for SQL Builder
+- SQLKata for SQL Query Builder
 - Web API
+- Fluent Validation
 - Swagger
 
 Front-end 
@@ -16,3 +17,4 @@ Front-end
 Design Patterns
 - CQRS
 - Mediator
+- Dependency Injection

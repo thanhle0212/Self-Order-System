@@ -13,7 +13,7 @@ namespace InstantPOS.Infrastructure
     public class SqlConnectionFactory:IDatabaseConnectionFactory
     {
         private readonly string _connectionString;
-        public SqlConnectionFactory(string connectionString = "Server=.;Database=InstantPOS;Uid=sa;Pwd=Admin@123$;MultipleActiveResultSets=true;") => _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+        public SqlConnectionFactory(string connectionString) => _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         
         public async Task<IDbConnection> CreateConnectionAsync()
         {

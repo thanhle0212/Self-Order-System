@@ -1,22 +1,21 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Command;
-using InstantPOS.Application.Interfaces.Repositories;
+using InstantPOS.Application.Interfaces.DatabaseServices;
 using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.CommandHandler
 {
-    public class CreateProductTypeCommandHandler : IRequestHandler<CreateProductTypeCommand, Guid>
+    public class CreateProductTypeCommandHandler : IRequestHandler<CreateProductTypeCommand, bool>
     {
-        private readonly IProductTypeRepository _productTypeRepository;
-        public CreateProductTypeCommandHandler(IProductTypeRepository productTypeRepository)
+        private readonly IProductTypeDataService _productTypeDataService;
+        public CreateProductTypeCommandHandler(IProductTypeDataService productTypeDataService)
         {
-            _productTypeRepository = productTypeRepository;
+            _productTypeDataService = productTypeDataService;
         }
-        public async Task<Guid> Handle(CreateProductTypeCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateProductTypeCommand request, CancellationToken cancellationToken)
         {
-            var result = await _productTypeRepository.CreateProductType(request);
+            var result = await _productTypeDataService.CreateProductType(request);
             return result;
         }
     }

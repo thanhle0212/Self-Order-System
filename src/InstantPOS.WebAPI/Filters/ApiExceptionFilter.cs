@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using InstantPOS.Application.Common;
+using InstantPOS.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

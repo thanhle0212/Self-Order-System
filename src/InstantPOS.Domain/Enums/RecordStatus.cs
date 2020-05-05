@@ -2,7 +2,7 @@
 {
     public enum RecordStatus
     {
-        Active,
-        InActive
+        Active = 1,
+        InActive = 2
     }
 }

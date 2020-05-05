@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
+using InstantPOS.Application.CQRS.ProductType.Command;
 
-namespace InstantPOS.Application.CQRS.ProductType.Command
+namespace InstantPOS.Application.Validator
 {
     public class CreateProductTypeCommandValidator : AbstractValidator<CreateProductTypeCommand>
     {

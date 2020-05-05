@@ -1,9 +1,7 @@
 ﻿using System;
-using MediatR;
-
-namespace InstantPOS.Application.CQRS.ProductType.Command
+namespace InstantPOS.Application.Models
 {
-    public class CreateProductTypeCommand : IRequest<bool>
+    public class ProductType
     {
         public Guid ProductTypeId { get; set; }
         public string ProductTypeKey { get; set; }

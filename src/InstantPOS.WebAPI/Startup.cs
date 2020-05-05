@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace InstantPOS.WebAPI
 {
@@ -34,6 +35,7 @@ namespace InstantPOS.WebAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instant POS API", Version = "v1" });
+                c.AddFluentValidationRules();
             });
         }
 

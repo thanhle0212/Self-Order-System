@@ -12,8 +12,12 @@
     <Folder Include="CQRS\ProductType\CommandHandler\" />
     <Folder Include="CQRS\ProductType\Query\" />
     <Folder Include="CQRS\ProductType\QueryHandler\" />
-    <Folder Include="Interfaces\Repositories\" />
+    <Folder Include="Interfaces\DatabaseServices\" />
     <Folder Include="Common\" />
+    <Folder Include="Common\Behaviours\" />
+    <Folder Include="Common\Exceptions\" />
+    <Folder Include="Models\" />
+    <Folder Include="Validator\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />
