@@ -5,20 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="CQRS\" />
     <Folder Include="CQRS\ProductType\" />
     <Folder Include="CQRS\ProductType\Command\" />
     <Folder Include="CQRS\ProductType\CommandHandler\" />
     <Folder Include="CQRS\ProductType\Query\" />
     <Folder Include="CQRS\ProductType\QueryHandler\" />
-    <Folder Include="Interfaces\DatabaseServices\" />
     <Folder Include="Common\" />
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Validator\" />
     <Folder Include="Mappings\" />
     <Folder Include="Common\ExtensionMethods\" />
+    <Folder Include="DatabaseServices\" />
+    <Folder Include="DatabaseServices\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />
@@ -28,6 +28,9 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="SqlKata" Version="1.1.7" />
+    <PackageReference Include="SqlKata.Execution" Version="1.1.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstantPOS.Domain\InstantPOS.Domain.csproj" />

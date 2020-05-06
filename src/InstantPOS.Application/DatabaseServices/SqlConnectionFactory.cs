@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace InstantPOS.Infrastructure
+namespace InstantPOS.Application.DatabaseServices
 {
     public interface IDatabaseConnectionFactory
     {

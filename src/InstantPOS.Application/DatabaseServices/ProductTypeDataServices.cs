@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantPOS.Application.Interfaces.DatabaseServices;
+using InstantPOS.Application.DatabaseServices;
+using InstantPOS.Application.DatabaseServices.Interfaces;
 using InstantPOS.Domain.Entities;
 using SqlKata.Compilers;
 using SqlKata.Execution;

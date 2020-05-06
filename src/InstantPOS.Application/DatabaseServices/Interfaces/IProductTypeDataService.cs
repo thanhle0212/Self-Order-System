@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using InstantPOS.Domain.Entities;
 
-namespace InstantPOS.Application.Interfaces.DatabaseServices
+namespace InstantPOS.Application.DatabaseServices.Interfaces
 {
     public interface IProductTypeDataService
     {

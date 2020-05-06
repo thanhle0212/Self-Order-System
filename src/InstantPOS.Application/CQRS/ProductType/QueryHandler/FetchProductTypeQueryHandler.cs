@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Query;
-using InstantPOS.Application.Interfaces.DatabaseServices;
 using InstantPOS.Application.DTOs;
 using MediatR;
 using AutoMapper;
+using InstantPOS.Application.DatabaseServices.Interfaces;
 
 namespace InstantPOS.Application.CQRS.ProductType.QueryHandler
 {

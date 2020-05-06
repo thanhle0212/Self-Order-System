@@ -1,4 +1,4 @@
-﻿using InstantPOS.Application.Interfaces.DatabaseServices;
+﻿using InstantPOS.Application.DatabaseServices.Interfaces;
 
 namespace InstantPOS.Application.CQRS.ProductType
 {

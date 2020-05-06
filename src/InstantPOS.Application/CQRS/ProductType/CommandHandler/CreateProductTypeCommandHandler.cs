@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using InstantPOS.Application.CQRS.ProductType.Command;
-using InstantPOS.Application.Interfaces.DatabaseServices;
+using InstantPOS.Application.DatabaseServices.Interfaces;
 using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.CommandHandler

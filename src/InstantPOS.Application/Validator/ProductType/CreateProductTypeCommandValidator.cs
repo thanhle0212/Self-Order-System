@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using InstantPOS.Application.CQRS.ProductType.Command;
-using InstantPOS.Application.Interfaces.DatabaseServices;
 
 namespace InstantPOS.Application.Validator
 {

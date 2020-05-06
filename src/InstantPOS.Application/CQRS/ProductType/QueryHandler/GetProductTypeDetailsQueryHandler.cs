@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using InstantPOS.Application.CQRS.ProductType.Query;
+using InstantPOS.Application.DatabaseServices.Interfaces;
 using InstantPOS.Application.DTOs;
-using InstantPOS.Domain.Entities;
-using InstantPOS.Application.Interfaces.DatabaseServices;
 using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.QueryHandler

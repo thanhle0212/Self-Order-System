@@ -15,4 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\InstantPOS.Application\InstantPOS.Application.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="File\" />
+    <Folder Include="Persistence\" />
+  </ItemGroup>
 </Project>
