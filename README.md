@@ -1,5 +1,7 @@
 # Self Order System
 
+NOTE: Run database/database_scripts.sql to create the database
+
 Architecture
 - Clean Architecture
 

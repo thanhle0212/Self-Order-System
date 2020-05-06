@@ -21,7 +21,7 @@ namespace InstantPOS.Application.CQRS.ProductType.QueryHandler
         }
         public async Task<ProductTypeDto> Handle(GetProductTypeDetailsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productTypeDataService.GetProductTypeDetails(request);
+            var result = await _productTypeDataService.GetProductTypeDetails(request.ProductTypeId);
             
             return _mapper.Map<InstantPOS.Domain.Entities.ProductType, ProductTypeDto>(result);
 

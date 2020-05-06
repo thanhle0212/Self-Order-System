@@ -14,7 +14,7 @@ namespace InstantPOS.Application.CQRS.ProductType.CommandHandler
         }
         public async Task<bool> Handle(DeleteProductTypeCommand request, CancellationToken cancellationToken)
         {
-           return await _productTypeDataService.DeleteProductType(request);
+           return await _productTypeDataService.DeleteProductType(request.ProductTypeId);
         }
     }
 }

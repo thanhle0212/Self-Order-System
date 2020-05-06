@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantPOS.Application.CQRS.ProductType.Command;
-using InstantPOS.Application.CQRS.ProductType.Query;
 using InstantPOS.Application.Interfaces.DatabaseServices;
 using InstantPOS.Domain.Entities;
-using InstantPOS.Domain.Enums;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 
@@ -20,7 +17,7 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             _database = database;
         }
 
-        public async Task<bool> CreateProductType(CreateProductTypeCommand request)
+        public async Task<bool> CreateProductType(ProductType request)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
@@ -33,7 +30,7 @@ namespace InstantPOS.Infrastructure.DatabaseServices
                 ProductTypeId = Guid.NewGuid(),
                 ProductTypeKey = request.ProductTypeKey,
                 ProductTypeName = request.ProductTypeName,
-                RecordStatus = RecordStatus.Active,
+                RecordStatus = request.RecordStatus,
                 CreatedDate = DateTime.UtcNow,
                 UpdatedUser = Guid.NewGuid()
             });
@@ -41,17 +38,17 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             return affectedRecords > 0;
         }
 
-        public async Task<bool> DeleteProductType(DeleteProductTypeCommand request)
+        public async Task<bool> DeleteProductType(Guid productTypeId)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
 
-            var affectedRecord = await db.Query("ProductType").Where("ProductTypeID", "=", request.ProductTypeId).DeleteAsync();
+            var affectedRecord = await db.Query("ProductType").Where("ProductTypeID", "=", productTypeId).DeleteAsync();
 
             return affectedRecord > 0;
         }
 
-        public async Task<IEnumerable<ProductType>> FetchProductType(FetchProductTypeQuery request)
+        public async Task<IEnumerable<ProductType>> FetchProductType()
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
@@ -61,17 +58,17 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             return await result.GetAsync<ProductType>();
         }
 
-        public async Task<ProductType> GetProductTypeDetails(GetProductTypeDetailsQuery request)
+        public async Task<ProductType> GetProductTypeDetails(Guid productTypeId)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
 
-            var result = db.Query("ProductType").Where("ProductTypeID", "=", request.ProductTypeId);
+            var result = db.Query("ProductType").Where("ProductTypeID", "=", productTypeId);
 
             return await result.FirstOrDefaultAsync<ProductType>();
         }
 
-        public async Task<bool> UpdateProductType(UpdateProductTypeCommand request)
+        public async Task<bool> UpdateProductType(ProductType request)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
@@ -83,9 +80,10 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             {
                 ProductTypeKey = request.ProductTypeKey,
                 ProductTypeName = request.ProductTypeName,
+                RecordStatus = request.RecordStatus,
                 UpdatedDate = DateTime.UtcNow,
                 UpdatedUser = Guid.NewGuid()
-            });
+            }); ;
 
             return affectedRecord > 0;
         }

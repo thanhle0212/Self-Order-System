@@ -16,7 +16,6 @@
     <Folder Include="Common\" />
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Exceptions\" />
-    <Folder Include="Models\" />
     <Folder Include="Validator\" />
     <Folder Include="Mappings\" />
     <Folder Include="Common\ExtensionMethods\" />

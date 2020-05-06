@@ -23,7 +23,7 @@ namespace InstantPOS.Application.CQRS.ProductType.QueryHandler
 
         public async Task<IEnumerable<ProductTypeDto>> Handle(FetchProductTypeQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productTypeDataService.FetchProductType(request);
+            var result = await _productTypeDataService.FetchProductType();
 
             return _mapper.Map< IEnumerable<InstantPOS.Domain.Entities.ProductType>, IEnumerable<ProductTypeDto>>(result);
         }
