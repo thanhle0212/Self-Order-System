@@ -12,6 +12,7 @@ Backend technology stack
 - Web API
 - Fluent Validation
 - Swagger
+- AutoMapper
 
 Front-end 
 - Blazor (comming soon)
