@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InstantPOS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ProductController : CustomBaseApiController
+    public class ProductsController : CustomBaseApiController
     {
         // GET: api/values
         [HttpGet]

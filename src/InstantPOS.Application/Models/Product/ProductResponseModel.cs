@@ -1,9 +1,11 @@
-﻿using InstantPOS.Domain.Enums;
+﻿using System;
+using InstantPOS.Domain.Enums;
 
 namespace InstantPOS.Application.Models.Product
 {
     public class ProductResponseModel
     {
+        public Guid ProductID { get; set; }
         public string ProductKey { get; set; }
         public string ProductName { get; set; }
         public string ProductImageUri { get; set; }

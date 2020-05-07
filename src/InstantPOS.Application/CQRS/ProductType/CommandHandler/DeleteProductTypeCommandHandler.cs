@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Command;
 using InstantPOS.Application.DatabaseServices.Interfaces;
@@ -14,7 +13,7 @@ namespace InstantPOS.Application.CQRS.ProductType.CommandHandler
         }
         public async Task<bool> Handle(DeleteProductTypeCommand request, CancellationToken cancellationToken)
         {
-           return await _productTypeDataService.DeleteProductType(request.ProductTypeId);
+           return await _productTypeDataService.DeleteProductType(request.ProductTypeID);
         }
     }
 }

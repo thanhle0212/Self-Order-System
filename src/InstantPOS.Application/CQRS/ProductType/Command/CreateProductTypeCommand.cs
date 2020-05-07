@@ -1,5 +1,4 @@
-﻿using InstantPOS.Domain.Entities;
-using InstantPOS.Domain.Enums;
+﻿using InstantPOS.Domain.Enums;
 using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.Command

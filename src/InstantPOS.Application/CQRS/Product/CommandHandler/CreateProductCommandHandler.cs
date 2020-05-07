@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using InstantPOS.Application.CQRS.Product.Command;
 using InstantPOS.Application.DatabaseServices.Interfaces;
 using MediatR;

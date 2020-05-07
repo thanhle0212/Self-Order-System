@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InstantPOS.WebAPI.Controllers
 {
 
-    public class ProductTypeController : CustomBaseApiController
+    public class ProductTypesController : CustomBaseApiController
     {
         // We can update search criteria later
         [HttpGet]
@@ -40,7 +40,7 @@ namespace InstantPOS.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> Put(Guid id, [FromBody]UpdateProductTypeCommand request)
         {
-            request.ProductTypeId = id;
+            request.ProductTypeID = id;
             return await Mediator.Send(request);
         }
 
@@ -48,7 +48,7 @@ namespace InstantPOS.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(Guid id)
         {
-            var query = new DeleteProductTypeCommand() { ProductTypeId = id };
+            var query = new DeleteProductTypeCommand() { ProductTypeID = id };
             return await Mediator.Send(query);
         }
     }

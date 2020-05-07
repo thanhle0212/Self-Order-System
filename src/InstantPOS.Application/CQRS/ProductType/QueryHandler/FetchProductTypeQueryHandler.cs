@@ -19,7 +19,9 @@ namespace InstantPOS.Application.CQRS.ProductType.QueryHandler
 
         public async Task<IEnumerable<ProductTypeResponseModel>> Handle(FetchProductTypeQuery request, CancellationToken cancellationToken)
         {
-            return await _productTypeDataService.FetchProductType();
+            var result = await _productTypeDataService.FetchProductType();
+            
+            return result;
         }
     }
 }

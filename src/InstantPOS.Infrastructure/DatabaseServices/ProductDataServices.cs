@@ -46,20 +46,36 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductResponseModel>> FetchProduct()
+        public async Task<IEnumerable<ProductResponseModel>> FetchProduct()
         {
-            throw new NotImplementedException();
+            using var conn = await _database.CreateConnectionAsync();
+            var db = new QueryFactory(conn, new SqlServerCompiler());
+
+            var result = db.Query("Product")
+                .Select(
+                "ProductID",
+                "ProductKey",
+                "ProductName",
+                "ProductImageUri",
+                "ProductTypeName",
+                "Product.RecordStatus")
+                .Join("ProductType", "ProductType.ProductTypeID", "Product.ProductTypeID")
+                .OrderByDesc("Product.UpdatedDate")
+                .OrderByDesc("Product.CreatedDate")
+                .ForPage(3,5); 
+
+            return await result.GetAsync<ProductResponseModel>();
         }
 
         private async Task<bool> IsProductKeyUnique(QueryFactory db, string productKey, Guid productID)
         {
             var result = await db.Query("Product").Where("ProductKey", "=", productKey)
-                .FirstOrDefaultAsync<dynamic>();
+                .FirstOrDefaultAsync<ProductResponseModel>();
 
             if (result == null)
                 return true;
 
-            return result.ProductId == productID;
+            return result.ProductID == productID;
         }
     }
 }
