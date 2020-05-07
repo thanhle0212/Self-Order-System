@@ -16,9 +16,7 @@ namespace InstantPOS.Application.CQRS.ProductType.CommandHandler
         }
         public async Task<bool> Handle(UpdateProductTypeCommand updateProductTypeCommandRequest, CancellationToken cancellationToken)
         {
-            var request = _mapper.Map<UpdateProductTypeCommand,
-                InstantPOS.Domain.Entities.ProductType>(updateProductTypeCommandRequest);
-            var result = await base._productTypeDataService.UpdateProductType(request);
+            var result = await base._productTypeDataService.UpdateProductType(updateProductTypeCommandRequest);
             return result;
         }
     }

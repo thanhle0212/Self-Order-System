@@ -19,6 +19,13 @@
     <Folder Include="Common\ExtensionMethods\" />
     <Folder Include="DatabaseServices\" />
     <Folder Include="DatabaseServices\Interfaces\" />
+    <Folder Include="CQRS\Product\" />
+    <Folder Include="CQRS\Product\Command\" />
+    <Folder Include="CQRS\Product\CommandHandler\" />
+    <Folder Include="CQRS\Product\Query\" />
+    <Folder Include="CQRS\Product\QueryHandler\" />
+    <Folder Include="Models\ProductType\" />
+    <Folder Include="Models\Product\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />
@@ -34,5 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstantPOS.Domain\InstantPOS.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\ProductTypeDetailsResponseModel.cs" />
   </ItemGroup>
 </Project>

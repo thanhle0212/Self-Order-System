@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Command;
 using InstantPOS.Application.CQRS.ProductType.Query;
-using InstantPOS.Application.DTOs;
+using InstantPOS.Application.Models.ProductType;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,7 +15,7 @@ namespace InstantPOS.WebAPI.Controllers
     {
         // We can update search criteria later
         [HttpGet]
-        public async Task<IEnumerable<ProductTypeDto>> Get()
+        public async Task<IEnumerable<ProductTypeResponseModel>> Get()
         {
             var query = new FetchProductTypeQuery();
             return await Mediator.Send(query);
@@ -23,7 +23,7 @@ namespace InstantPOS.WebAPI.Controllers
 
         // GET api/ProductType/ProductTypeID
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductTypeDto>> Get(Guid id)
+        public async Task<ActionResult<ProductTypeDetailsResponseModel>> Get(Guid id)
         {
             var query = new GetProductTypeDetailsQuery() { ProductTypeId = id};
             return await Mediator.Send(query);

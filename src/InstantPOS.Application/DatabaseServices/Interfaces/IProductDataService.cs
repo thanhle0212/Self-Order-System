@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantPOS.Domain.Entities;
+using InstantPOS.Application.CQRS.Product.Command;
+using InstantPOS.Application.Models.Product;
 
 namespace InstantPOS.Application.DatabaseServices.Interfaces
 {
     public interface IProductDataService
     {
-        Task<bool> CreateProduct(Product request);
-        Task<bool> UpdateProduct(Product request);
-        Task<bool> DeleteProduct(Guid productId);
-        Task<Product> GetProductDetails(Guid productId);
-        Task<IEnumerable<Product>> FetchProduct();
+        Task<bool> CreateProduct(CreateProductCommand request);
+        Task<bool> DeleteProduct(Guid productTypeId);
+        Task<IEnumerable<ProductResponseModel>> FetchProduct();
     }
 }

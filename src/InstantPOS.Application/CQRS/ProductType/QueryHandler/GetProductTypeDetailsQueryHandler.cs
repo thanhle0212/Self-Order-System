@@ -1,28 +1,24 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using InstantPOS.Application.CQRS.ProductType.Query;
 using InstantPOS.Application.DatabaseServices.Interfaces;
-using InstantPOS.Application.DTOs;
+using InstantPOS.Application.Models.ProductType;
 using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.QueryHandler
 {
-    public class GetProductTypeDetailsQueryHandler: IRequestHandler<GetProductTypeDetailsQuery, ProductTypeDto>
+    public class GetProductTypeDetailsQueryHandler: IRequestHandler<GetProductTypeDetailsQuery, ProductTypeDetailsResponseModel>
     {
         private readonly IProductTypeDataService _productTypeDataService;
-        private readonly IMapper _mapper;
-        public GetProductTypeDetailsQueryHandler(IProductTypeDataService productTypeDataService, IMapper mapper)
+        public GetProductTypeDetailsQueryHandler(IProductTypeDataService productTypeDataService)
         {
             _productTypeDataService = productTypeDataService;
-            _mapper = mapper;
         }
-        public async Task<ProductTypeDto> Handle(GetProductTypeDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<ProductTypeDetailsResponseModel> Handle(GetProductTypeDetailsQuery request, CancellationToken cancellationToken)
         {
             var result = await _productTypeDataService.GetProductTypeDetails(request.ProductTypeId);
-            
-            return _mapper.Map<InstantPOS.Domain.Entities.ProductType, ProductTypeDto>(result);
 
+            return result;
         }
     }
 }

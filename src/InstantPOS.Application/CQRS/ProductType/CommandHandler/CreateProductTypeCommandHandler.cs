@@ -17,9 +17,7 @@ namespace InstantPOS.Application.CQRS.ProductType.CommandHandler
 
         public async Task<bool> Handle(CreateProductTypeCommand createProductTypeCommandRequest, CancellationToken cancellationToken)
         {
-            var request = _mapper.Map<CreateProductTypeCommand, InstantPOS.Domain.Entities.ProductType>
-                (createProductTypeCommandRequest);
-            var result = await base._productTypeDataService.CreateProductType(request);
+            var result = await base._productTypeDataService.CreateProductType(createProductTypeCommandRequest);
             return result;
         }
     }

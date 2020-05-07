@@ -1,10 +1,10 @@
 ﻿using System;
-using InstantPOS.Domain.Common;
+using InstantPOS.Domain.Entities;
 using InstantPOS.Domain.Enums;
 
-namespace InstantPOS.Domain.Entities
+namespace InstantPOS.Application.Models.ProductType
 {
-    public class ProductType : AuditableEntity
+    public class ProductTypeDetailsResponseModel: AuditableEntity
     {
         public Guid ProductTypeId { get; set; }
         public string ProductTypeKey { get; set; }

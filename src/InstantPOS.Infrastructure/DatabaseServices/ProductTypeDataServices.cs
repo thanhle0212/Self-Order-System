@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantPOS.Application.DatabaseServices;
+using InstantPOS.Application.CQRS.ProductType.Command;
 using InstantPOS.Application.DatabaseServices.Interfaces;
-using InstantPOS.Domain.Entities;
+using InstantPOS.Application.Models.ProductType;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 
@@ -18,7 +18,7 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             _database = database;
         }
 
-        public async Task<bool> CreateProductType(ProductType request)
+        public async Task<bool> CreateProductType(CreateProductTypeCommand request)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
@@ -49,27 +49,27 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             return affectedRecord > 0;
         }
 
-        public async Task<IEnumerable<ProductType>> FetchProductType()
+        public async Task<IEnumerable<ProductTypeResponseModel>> FetchProductType()
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
 
             var result = db.Query("ProductType");
 
-            return await result.GetAsync<ProductType>();
+            return await result.GetAsync<ProductTypeResponseModel>();
         }
 
-        public async Task<ProductType> GetProductTypeDetails(Guid productTypeId)
+        public async Task<ProductTypeDetailsResponseModel> GetProductTypeDetails(Guid productTypeId)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
 
             var result = db.Query("ProductType").Where("ProductTypeID", "=", productTypeId);
 
-            return await result.FirstOrDefaultAsync<ProductType>();
+            return await result.FirstOrDefaultAsync<ProductTypeDetailsResponseModel>();
         }
 
-        public async Task<bool> UpdateProductType(ProductType request)
+        public async Task<bool> UpdateProductType(UpdateProductTypeCommand request)
         {
             using var conn = await _database.CreateConnectionAsync();
             var db = new QueryFactory(conn, new SqlServerCompiler());
@@ -92,7 +92,7 @@ namespace InstantPOS.Infrastructure.DatabaseServices
         private async Task<bool> IsProductTypeKeyUnique(QueryFactory db, string productTypeKey, Guid productTypeID)
         {
             var result = await db.Query("ProductType").Where("ProductTypeKey", "=", productTypeKey)
-                .FirstOrDefaultAsync<ProductType>();
+                .FirstOrDefaultAsync<dynamic>();
 
             if (result == null)
                 return true;

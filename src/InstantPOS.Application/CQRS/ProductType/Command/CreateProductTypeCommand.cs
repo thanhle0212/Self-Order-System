@@ -1,21 +1,13 @@
-﻿using System;
-using AutoMapper;
-using InstantPOS.Application.Mappings;
+﻿using InstantPOS.Domain.Entities;
+using InstantPOS.Domain.Enums;
 using MediatR;
 
 namespace InstantPOS.Application.CQRS.ProductType.Command
 {
-    public class CreateProductTypeCommand : IRequest<bool>, IMapFrom<InstantPOS.Domain.Entities.ProductType>
+    public class CreateProductTypeCommand : IRequest<bool>
     {
         public string ProductTypeKey { get; set; }
         public string ProductTypeName { get; set; }
-        public int RecordStatus { get; set; }
-
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<CreateProductTypeCommand, InstantPOS.Domain.Entities.ProductType>()
-                .ForMember(d => d.RecordStatus, opt => opt.MapFrom(s => (int)s.RecordStatus));
-
-        }
+        public RecordStatus RecordStatus { get; set; }
     }
 }
