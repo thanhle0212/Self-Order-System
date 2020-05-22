@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using InstantPOS.Application.Common.Exceptions;
 using MediatR;
 
 namespace InstantPOS.Application.Common.Behaviours
@@ -32,7 +33,7 @@ namespace InstantPOS.Application.Common.Behaviours
 
                 if (failures.Count != 0)
                 {
-                    throw new ValidationException(failures);
+                    throw new CustomValidationException(failures);
                 }
             }
 

@@ -1,5 +1,6 @@
 using InstantPOS.Application;
 using InstantPOS.Infrastructure;
+using InstantPOS.WebAPI.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +25,8 @@ namespace InstantPOS.WebAPI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.AddControllers();
+            services.AddControllers(options =>
+                options.Filters.Add(new ApiExceptionFilter()));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instant POS API", Version = "v1" });
