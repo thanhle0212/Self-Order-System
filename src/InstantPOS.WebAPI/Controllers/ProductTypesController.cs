@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Command;
 using InstantPOS.Application.CQRS.ProductType.Query;
 using InstantPOS.Application.Models.ProductType;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,6 +14,11 @@ namespace InstantPOS.WebAPI.Controllers
 
     public class ProductTypesController : CustomBaseApiController
     {
+        public ProductTypesController(IMediator mediator) : base(mediator)
+        {
+
+        }
+
         // We can update search criteria later
         [HttpGet]
         public async Task<IEnumerable<ProductTypeResponseModel>> Get()

@@ -9,7 +9,19 @@ namespace InstantPOS.WebAPI.Controllers
     public abstract class CustomBaseApiController : ControllerBase
     {
         private IMediator _mediator;
+        protected IMediator Mediator;
+        public CustomBaseApiController(IMediator mediator)
+        {
+            _mediator = mediator;
+            Mediator = _mediator;
+        }
 
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        public CustomBaseApiController()
+        {
+            if (_mediator == null)
+            {
+                Mediator = HttpContext.RequestServices.GetService<IMediator>();
+            }
+        }
     }
 }
