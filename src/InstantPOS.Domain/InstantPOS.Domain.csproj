@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Enums\" />
     <Folder Include="Entities\" />
-    <Folder Include="Common\" />
   </ItemGroup>
 </Project>
