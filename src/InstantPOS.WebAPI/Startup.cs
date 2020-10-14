@@ -1,5 +1,6 @@
 using InstantPOS.Application;
 using InstantPOS.Infrastructure;
+using InstantPOS.WebAPI.Extensions;
 using InstantPOS.WebAPI.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,10 +24,32 @@ namespace InstantPOS.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Register services in Installers folder
+            services.AddServicesInAssembly(Configuration);
+
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddControllers(options =>
                 options.Filters.Add(new ApiExceptionFilter()));
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminAccess", policy => policy.RequireRole("Admin"));
+
+                options.AddPolicy("ManagerAccess", policy =>
+                    policy.RequireAssertion(context =>
+                                context.User.IsInRole("Admin")
+                                || context.User.IsInRole("Manager")));
+
+                options.AddPolicy("UserAccess", policy =>
+                    policy.RequireAssertion(context =>
+                                context.User.IsInRole("Admin")
+                                || context.User.IsInRole("Manager")
+                                || context.User.IsInRole("User")));
+            });
+
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instant POS API", Version = "v1" });
@@ -51,6 +74,10 @@ namespace InstantPOS.WebAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Instant POS API V1");
             });
 
+            //Adds authenticaton middleware to the pipeline so authentication will be performed automatically on each request to host
+            app.UseAuthentication();
+
+            //Adds authorization middleware to the pipeline to make sure the Api endpoint cannot be accessed by anonymous clients
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
