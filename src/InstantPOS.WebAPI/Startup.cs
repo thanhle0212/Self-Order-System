@@ -2,6 +2,7 @@ using InstantPOS.Application;
 using InstantPOS.Infrastructure;
 using InstantPOS.WebAPI.Extensions;
 using InstantPOS.WebAPI.Filters;
+using InstantPOS.WebAPI.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,21 +33,24 @@ namespace InstantPOS.WebAPI
             services.AddControllers(options =>
                 options.Filters.Add(new ApiExceptionFilter()));
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminAccess", policy => policy.RequireRole("Admin"));
+            // Add authorization services
+            RegisterAuthorization(services, Configuration);
 
-                options.AddPolicy("ManagerAccess", policy =>
-                    policy.RequireAssertion(context =>
-                                context.User.IsInRole("Admin")
-                                || context.User.IsInRole("Manager")));
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("AdminAccess", policy => policy.RequireRole("Admin"));
 
-                options.AddPolicy("UserAccess", policy =>
-                    policy.RequireAssertion(context =>
-                                context.User.IsInRole("Admin")
-                                || context.User.IsInRole("Manager")
-                                || context.User.IsInRole("User")));
-            });
+            //    options.AddPolicy("ManagerAccess", policy =>
+            //        policy.RequireAssertion(context =>
+            //                    context.User.IsInRole("Admin")
+            //                    || context.User.IsInRole("Manager")));
+
+            //    options.AddPolicy("UserAccess", policy =>
+            //        policy.RequireAssertion(context =>
+            //                    context.User.IsInRole("Admin")
+            //                    || context.User.IsInRole("Manager")
+            //                    || context.User.IsInRole("User")));
+            //});
 
 
 
@@ -84,6 +88,10 @@ namespace InstantPOS.WebAPI
             {
                 endpoints.MapControllers();
             });
+        }
+        public virtual void RegisterAuthorization(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthorizationPolicies(configuration);
         }
     }
 }
