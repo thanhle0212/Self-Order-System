@@ -36,24 +36,6 @@ namespace InstantPOS.WebAPI
             // Add authorization services
             RegisterAuthorization(services, Configuration);
 
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("AdminAccess", policy => policy.RequireRole("Admin"));
-
-            //    options.AddPolicy("ManagerAccess", policy =>
-            //        policy.RequireAssertion(context =>
-            //                    context.User.IsInRole("Admin")
-            //                    || context.User.IsInRole("Manager")));
-
-            //    options.AddPolicy("UserAccess", policy =>
-            //        policy.RequireAssertion(context =>
-            //                    context.User.IsInRole("Admin")
-            //                    || context.User.IsInRole("Manager")
-            //                    || context.User.IsInRole("User")));
-            //});
-
-
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instant POS API", Version = "v1" });
