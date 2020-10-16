@@ -1,13 +1,14 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84161BDC-03C2-4796-A001-430637A10D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantPOS.Domain", "src\InstantPOS.Domain\InstantPOS.Domain.csproj", "{B80DC1D9-3508-4C46-A3A2-9022A87F4A13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantPOS.Domain", "src\InstantPOS.Domain\InstantPOS.Domain.csproj", "{B80DC1D9-3508-4C46-A3A2-9022A87F4A13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantPOS.Infrastructure", "src\InstantPOS.Infrastructure\InstantPOS.Infrastructure.csproj", "{4AF7192F-A815-40B6-9F8B-608F7F23FB9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantPOS.Infrastructure", "src\InstantPOS.Infrastructure\InstantPOS.Infrastructure.csproj", "{4AF7192F-A815-40B6-9F8B-608F7F23FB9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantPOS.WebAPI", "src\InstantPOS.WebAPI\InstantPOS.WebAPI.csproj", "{017398FD-EB1D-4E5F-949A-078A72A67BA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantPOS.WebAPI", "src\InstantPOS.WebAPI\InstantPOS.WebAPI.csproj", "{017398FD-EB1D-4E5F-949A-078A72A67BA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1B907BB5-9EEB-4019-8645-43671F6727AB}"
 EndProject
@@ -16,11 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{0B
 		database\database_scripts.sql = database\database_scripts.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantPOS.Application", "src\InstantPOS.Application\InstantPOS.Application.csproj", "{E4A28126-9BEA-494D-B918-CB66131C154D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantPOS.Application", "src\InstantPOS.Application\InstantPOS.Application.csproj", "{E4A28126-9BEA-494D-B918-CB66131C154D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantPOS.Application.Tests", "tests\InstantPOS.Application.Tests\InstantPOS.Application.Tests.csproj", "{297C384A-0C7A-4ACC-8489-226F0D58C947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantPOS.Application.Tests", "tests\InstantPOS.Application.Tests\InstantPOS.Application.Tests.csproj", "{297C384A-0C7A-4ACC-8489-226F0D58C947}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantPOS.WebAPI.Tests", "tests\InstantPOS.WebAPI.Tests\InstantPOS.WebAPI.Tests.csproj", "{5309EF76-4F31-4A16-9496-AD40A6ED17E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantPOS.WebAPI.Tests", "tests\InstantPOS.WebAPI.Tests\InstantPOS.WebAPI.Tests.csproj", "{5309EF76-4F31-4A16-9496-AD40A6ED17E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +54,9 @@ Global
 		{5309EF76-4F31-4A16-9496-AD40A6ED17E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5309EF76-4F31-4A16-9496-AD40A6ED17E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B80DC1D9-3508-4C46-A3A2-9022A87F4A13} = {84161BDC-03C2-4796-A001-430637A10D0A}
 		{4AF7192F-A815-40B6-9F8B-608F7F23FB9F} = {84161BDC-03C2-4796-A001-430637A10D0A}
@@ -60,5 +64,8 @@ Global
 		{E4A28126-9BEA-494D-B918-CB66131C154D} = {84161BDC-03C2-4796-A001-430637A10D0A}
 		{297C384A-0C7A-4ACC-8489-226F0D58C947} = {1B907BB5-9EEB-4019-8645-43671F6727AB}
 		{5309EF76-4F31-4A16-9496-AD40A6ED17E6} = {1B907BB5-9EEB-4019-8645-43671F6727AB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBC4A2DF-33CB-4F9B-B439-0650C67EDC55}
 	EndGlobalSection
 EndGlobal

@@ -5,12 +5,14 @@ using InstantPOS.Application.CQRS.ProductType.Command;
 using InstantPOS.Application.CQRS.ProductType.Query;
 using InstantPOS.Application.Models.ProductType;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace InstantPOS.WebAPI.Controllers
 {
+    [Authorize]
 
     public class ProductTypesController : CustomBaseApiController
     {

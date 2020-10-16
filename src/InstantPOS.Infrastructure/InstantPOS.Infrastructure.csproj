@@ -5,15 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
+    <Compile Remove="File\**" />
+    <Compile Remove="Persistence\**" />
+    <EmbeddedResource Remove="File\**" />
+    <EmbeddedResource Remove="Persistence\**" />
+    <None Remove="File\**" />
+    <None Remove="Persistence\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstantPOS.Application\InstantPOS.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="File\" />
-    <Folder Include="Persistence\" />
     <Folder Include="DatabaseServices\" />
   </ItemGroup>
 </Project>
