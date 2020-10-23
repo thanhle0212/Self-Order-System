@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InstantPOS.Application.CQRS.Product.Command;
+﻿using InstantPOS.Application.CQRS.Product.Command;
 using InstantPOS.Application.CQRS.Product.Query;
 using InstantPOS.Application.Models.Product;
 using InstantPOS.WebAPI.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
