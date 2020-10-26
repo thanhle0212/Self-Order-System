@@ -12,21 +12,23 @@ namespace InstantPOS.Infrastructure.DatabaseServices
     public class ProductDataServices : IProductDataService
     {
         private readonly IDatabaseConnectionFactory _database;
+        private readonly QueryFactory _db;
 
-        public ProductDataServices(IDatabaseConnectionFactory database)
+        public ProductDataServices(IDatabaseConnectionFactory database, QueryFactory db)
         {
             _database = database;
+            _db = db;
         }
 
         public async Task<bool> CreateProduct(CreateProductCommand request)
         {
-            using var conn = await _database.CreateConnectionAsync();
-            var db = new QueryFactory(conn, new SqlServerCompiler());
+            //using var conn = await _database.CreateConnectionAsync();
+            //var db = new QueryFactory(conn, new SqlServerCompiler());
 
-            if (!await IsProductKeyUnique(db, request.ProductKey, Guid.Empty))
+            if (!await IsProductKeyUnique(_db, request.ProductKey, Guid.Empty))
                 return false;
 
-            var affectedRecords = await db.Query("Product").InsertAsync(new
+            var affectedRecords = await _db.Query("Product").InsertAsync(new
             {
                 ProductId = Guid.NewGuid(),
                 ProductKey = request.ProductKey,

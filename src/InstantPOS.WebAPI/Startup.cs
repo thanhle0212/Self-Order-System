@@ -53,19 +53,29 @@ namespace InstantPOS.WebAPI
 
             //});
 
-            services.AddScoped(factory =>
-            {
-                return new QueryFactory
-                {
-                    Compiler = new SqlServerCompiler(),
-                    Connection = new SqlConnection(Configuration.GetConnectionString("InstantPOS")),
-                    Logger = compiled => Console.WriteLine(compiled)
-                };
-            });
+            //services.AddScoped(factory =>
+            //{
+            //    return new QueryFactory
+            //    {
+            //        Compiler = new SqlServerCompiler(),
+            //        Connection = new SqlConnection(Configuration.GetConnectionString("InstantPOS")),
+            //        Logger = compiled => Console.WriteLine(compiled)
+            //    };
+            //});
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instant POS API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Scheme = "Bearer",
+                    Description = "Enter 'Bearer' following by space and JWT.",
+                    Name = "Authorization",
+                    //Type = SecuritySchemeType.Http,
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                });
+
                 c.AddFluentValidationRules();
             });
         }
