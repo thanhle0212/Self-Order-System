@@ -9,7 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SqlKata.Compilers;
+using SqlKata.Execution;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Data.SqlClient;
 
 namespace InstantPOS.WebAPI
 {
@@ -36,9 +40,20 @@ namespace InstantPOS.WebAPI
             // Add authorization services
             RegisterAuthorization(services, Configuration);
 
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Instant POS API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Scheme = "Bearer",
+                    Description = "Enter 'Bearer' following by space and JWT.",
+                    Name = "Authorization",
+                    //Type = SecuritySchemeType.Http,
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                });
+
                 c.AddFluentValidationRules();
             });
         }

@@ -4,6 +4,10 @@ using InstantPOS.Infrastructure.DatabaseServices;
 using Microsoft.Extensions.Configuration;
 using InstantPOS.Application.DatabaseServices.Interfaces;
 using InstantPOS.Application.Common;
+using SqlKata.Execution;
+using SqlKata.Compilers;
+using System.Data.SqlClient;
+using System;
 
 namespace InstantPOS.Infrastructure
 {
@@ -15,6 +19,15 @@ namespace InstantPOS.Infrastructure
             services.AddTransient<IProductDataService, ProductDataServices>();
             services.AddTransient<IDatabaseConnectionFactory>(e => {
                 return new SqlConnectionFactory(configuration[Configuration.ConnectionString]);
+            });
+            services.AddScoped(factory =>
+            {
+                return new QueryFactory
+                {
+                    Compiler = new SqlServerCompiler(),
+                    Connection = new SqlConnection(configuration[Configuration.ConnectionString]),
+                    Logger = compiled => Console.WriteLine(compiled)
+                };
             });
             return services;
         }
