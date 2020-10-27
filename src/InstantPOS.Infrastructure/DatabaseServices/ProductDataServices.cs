@@ -25,7 +25,9 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             //using var conn = await _database.CreateConnectionAsync();
             //var db = new QueryFactory(conn, new SqlServerCompiler());
 
-            if (!await IsProductKeyUnique(_db, request.ProductKey, Guid.Empty))
+            //if (!await IsProductKeyUnique(_db, request.ProductKey, Guid.Empty))
+            //    return false;
+            if (!await IsProductKeyUnique(request.ProductKey, Guid.Empty))
                 return false;
 
             var affectedRecords = await _db.Query("Product").InsertAsync(new
@@ -50,10 +52,10 @@ namespace InstantPOS.Infrastructure.DatabaseServices
 
         public async Task<IEnumerable<ProductResponseModel>> FetchProduct()
         {
-            using var conn = await _database.CreateConnectionAsync();
-            var db = new QueryFactory(conn, new SqlServerCompiler());
+            //using var conn = await _database.CreateConnectionAsync();
+            //var db = new QueryFactory(conn, new SqlServerCompiler());
 
-            var result = db.Query("Product")
+            var result = _db.Query("Product")
                 .Select(
                 "ProductID",
                 "ProductKey",
@@ -69,9 +71,9 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             return await result.GetAsync<ProductResponseModel>();
         }
 
-        private async Task<bool> IsProductKeyUnique(QueryFactory db, string productKey, Guid productID)
+        private async Task<bool> IsProductKeyUnique(string productKey, Guid productID)
         {
-            var result = await db.Query("Product").Where("ProductKey", "=", productKey)
+            var result = await _db.Query("Product").Where("ProductKey", "=", productKey)
                 .FirstOrDefaultAsync<ProductResponseModel>();
 
             if (result == null)

@@ -55,6 +55,7 @@ namespace InstantPOS.WebAPI
                 });
 
                 c.AddFluentValidationRules();
+                c.OperationFilter<SwaggerAuthorizeCheckOperationFilter>();
             });
         }
 
