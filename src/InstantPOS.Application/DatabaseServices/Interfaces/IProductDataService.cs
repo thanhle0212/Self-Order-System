@@ -10,6 +10,6 @@ namespace InstantPOS.Application.DatabaseServices.Interfaces
     {
         Task<bool> CreateProduct(CreateProductCommand request);
         Task<bool> DeleteProduct(Guid productTypeId);
-        Task<IEnumerable<ProductResponseModel>> FetchProduct();
+        Task<IEnumerable<ProductResponseModel>> FetchProduct(int pageNo, int pageSize);
     }
 }

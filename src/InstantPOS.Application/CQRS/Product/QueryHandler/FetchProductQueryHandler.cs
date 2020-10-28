@@ -15,7 +15,7 @@ namespace InstantPOS.Application.CQRS.Product.QueryHandler
         }
         public async Task<IEnumerable<ProductResponseModel>> Handle(FetchProductQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productDataService.FetchProduct();
+            var result = await _productDataService.FetchProduct(request.PageNo, request.PageSize);
 
             return result;
         }

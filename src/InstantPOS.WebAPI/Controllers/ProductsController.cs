@@ -24,9 +24,9 @@ namespace InstantPOS.WebAPI.Controllers
         }
         // GET: api/values
         [HttpGet]
-        public async Task<IEnumerable<ProductResponseModel>> Get()
+        public async Task<IEnumerable<ProductResponseModel>> Get(int pageNo, int pageSize)
         {
-            var query = new FetchProductQuery();
+            var query = new FetchProductQuery() { PageNo = pageNo, PageSize = pageSize };
             return await Mediator.Send(query);
         }
 
