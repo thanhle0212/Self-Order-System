@@ -9,10 +9,10 @@ I am working on a modernization project where the backend databases have ton of 
 I keep the original repo in the "forked" branch.   If you want to see the code changes as a result of IdentityServer4 integration, compare the "forked" vs "master" branch.  If you are new to IdentityServer4 and look for an enterprise application security solution, check out my blog [DevKit API Security — IdentityServer4 with Admin UI, ASP.NET WebAPI, and Angular Tutorial](https://medium.com/scrum-and-coke/devkit-webapi-security-d7a45e34a5cd)
 
 ## Enhancements Made to Original Repo
-- Integration with IdentityServer4 to secure WebAPI with policy
-- Implementing Dependency Injection for SQLKata
-- Adding paging example code to use SQLData "ForPage"
-- Adding Swagger filter to support Bearer Token
+- Integration example with IdentityServer4 to secure WebAPI using authorizaton filter policy
+- Implementing dependency injection (DI) for SQLKata to provide clean code
+- Adding paging example code in controller and CQRS to support SQLData "ForPage"
+- Adding Swagger and Swagger filter to enable entering Bearer Token in Swagger UI in order to access secure WebAPI endpoints
 
 # Self Order System
 
