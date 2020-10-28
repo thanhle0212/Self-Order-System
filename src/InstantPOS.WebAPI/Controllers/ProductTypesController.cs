@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using InstantPOS.Application.CQRS.ProductType.Command;
 using InstantPOS.Application.CQRS.ProductType.Query;
 using InstantPOS.Application.Models.ProductType;
+using InstantPOS.WebAPI.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InstantPOS.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [Authorize(Policy = AuthorizationConsts.AdministrationPolicy)]
 
     public class ProductTypesController : CustomBaseApiController
     {

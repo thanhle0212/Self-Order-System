@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\" />
     <Folder Include="CQRS\ProductType\" />
     <Folder Include="CQRS\ProductType\Command\" />
     <Folder Include="CQRS\ProductType\CommandHandler\" />
@@ -19,10 +18,8 @@
     <Folder Include="Common\ExtensionMethods\" />
     <Folder Include="DatabaseServices\" />
     <Folder Include="DatabaseServices\Interfaces\" />
-    <Folder Include="CQRS\Product\" />
     <Folder Include="CQRS\Product\Command\" />
     <Folder Include="CQRS\Product\CommandHandler\" />
-    <Folder Include="CQRS\Product\Query\" />
     <Folder Include="CQRS\Product\QueryHandler\" />
     <Folder Include="Models\ProductType\" />
     <Folder Include="Models\Product\" />

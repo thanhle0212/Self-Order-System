@@ -22,11 +22,6 @@ namespace InstantPOS.Infrastructure.DatabaseServices
 
         public async Task<bool> CreateProduct(CreateProductCommand request)
         {
-            //using var conn = await _database.CreateConnectionAsync();
-            //var db = new QueryFactory(conn, new SqlServerCompiler());
-
-            //if (!await IsProductKeyUnique(_db, request.ProductKey, Guid.Empty))
-            //    return false;
             if (!await IsProductKeyUnique(request.ProductKey, Guid.Empty))
                 return false;
 
@@ -50,10 +45,8 @@ namespace InstantPOS.Infrastructure.DatabaseServices
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ProductResponseModel>> FetchProduct()
+        public async Task<IEnumerable<ProductResponseModel>> FetchProduct(int pageNo, int pageSize)
         {
-            //using var conn = await _database.CreateConnectionAsync();
-            //var db = new QueryFactory(conn, new SqlServerCompiler());
 
             var result = _db.Query("Product")
                 .Select(
@@ -66,7 +59,7 @@ namespace InstantPOS.Infrastructure.DatabaseServices
                 .Join("ProductType", "ProductType.ProductTypeID", "Product.ProductTypeID")
                 .OrderByDesc("Product.UpdatedDate")
                 .OrderByDesc("Product.CreatedDate")
-                .ForPage(3,5); 
+                .ForPage(pageNo, pageSize); 
 
             return await result.GetAsync<ProductResponseModel>();
         }
