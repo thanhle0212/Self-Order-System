@@ -8,7 +8,7 @@ I am working on a modernization project where the backend databases have ton of 
 
 I keep the original repo in the "forked" branch.   If you want to see the code changes as a result of IdentityServer4 integration, compare the "forked" vs "master" branch.  If you are new to IdentityServer4 and look for an enterprise application security solution, check out my blog [DevKit API Security — IdentityServer4 with Admin UI, ASP.NET WebAPI, and Angular Tutorial](https://medium.com/scrum-and-coke/devkit-webapi-security-d7a45e34a5cd)
 
-## Enhancements to Original Repo
+## Enhancements Made to Original Repo
 - Integration with IdentityServer4 to secure WebAPI with policy
 - Implementing Dependency Injection for SQLKata
 - Adding paging example code to use SQLData "ForPage"
