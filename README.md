@@ -12,7 +12,7 @@ I keep the original repo in the "forked" branch.   If you want to see the code c
 - Integration with IdentityServer4 to secure WebAPI with policy
 - Implementing Dependency Injection for SQLKata
 - Adding paging example code to use SQLData "ForPage"
-- Adding Swagger filter to support secure Token
+- Adding Swagger filter to support Bearer Token
 
 # Self Order System
 
