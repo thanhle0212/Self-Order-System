@@ -37,7 +37,7 @@ Design Patterns
 - Dependency Injection
 
 # IdentityServer4 Integration Code
-### RegisterIdentityServerAuthentication.cs, project IntantPOS.WebAI > Installers
+### RegisterIdentityServerAuthentication.cs in IntantPOS.WebAI > Installers
 
     internal class RegisterIdentityServerAuthentication : IServiceRegistration
     {
@@ -56,6 +56,71 @@ Design Patterns
                     });
         }
     }
+### StartupHelpers.cs in IntantPOS.WebAI > Helpers
+    public static class StartupHelpers
+    {
+        public static void AddAuthorizationPolicies(this IServiceCollection services, IConfiguration configuration)
+        {
+            var adminApiConfiguration = configuration.GetSection(nameof(AdminApiConfiguration)).Get<AdminApiConfiguration>();
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(AuthorizationConsts.AdministrationPolicy,
+                    policy =>
+                        policy.RequireAssertion(context => context.User.HasClaim(c =>
+                                (c.Type == JwtClaimTypes.Role && c.Value == adminApiConfiguration.AdministrationRole) ||
+                                (c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == adminApiConfiguration.AdministrationRole)
+                            )
+                        ));
+            });
+        }
+    }
+
+### ProductsController.cs in InstantPOS.WebAPI.Controllers
+
+namespace InstantPOS.WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [Authorize]
+
+    public class ProductsController : CustomBaseApiController
+    {
+        public ProductsController(IMediator mediator) : base(mediator)
+        {
+
+        }
+        // GET: api/values
+        [HttpGet]
+        public async Task<IEnumerable<ProductResponseModel>> Get(int pageNo, int pageSize)
+        {
+            var query = new FetchProductQuery() { PageNo = pageNo, PageSize = pageSize };
+            return await Mediator.Send(query);
+        }
+
+
+
+### ProductTypesController.cs in InstantPOS.WebAPI.Controllers
+
+namespace InstantPOS.WebAPI.Controllers
+{
+    [Authorize(Policy = AuthorizationConsts.AdministrationPolicy)]
+
+    public class ProductTypesController : CustomBaseApiController
+    {
+        public ProductTypesController(IMediator mediator) : base(mediator)
+        {
+
+        }
+
+        // We can update search criteria later
+        [HttpGet]
+        public async Task<IEnumerable<ProductTypeResponseModel>> Get()
+        {
+            var query = new FetchProductTypeQuery();
+            return await Mediator.Send(query);
+        }
+
 
 # Registering SQLKata in DI container
 
@@ -122,6 +187,42 @@ Design Patterns
         return result;
     }
 
+### ProductDataServices.cs in InstantPOS.Infrastructure > DatabaseServices
+    public async Task<IEnumerable<ProductResponseModel>> FetchProduct(int pageNo, int pageSize)
+    {
+
+        var result = _db.Query("Product")
+            .Select(
+            "ProductID",
+            "ProductKey",
+            "ProductName",
+            "ProductImageUri",
+            "ProductTypeName",
+            "Product.RecordStatus")
+            .Join("ProductType", "ProductType.ProductTypeID", "Product.ProductTypeID")
+            .OrderByDesc("Product.UpdatedDate")
+            .OrderByDesc("Product.CreatedDate")
+            .ForPage(pageNo, pageSize); 
+
+        return await result.GetAsync<ProductResponseModel>();
+    }
+
+### IProductDataService.cs in InstantPOS.Application > DatabaseServices > Interfaces
+    public interface IProductDataService
+    {
+        Task<bool> CreateProduct(CreateProductCommand request);
+        Task<bool> DeleteProduct(Guid productTypeId);
+        Task<IEnumerable<ProductResponseModel>> FetchProduct(int pageNo, int pageSize);
+    }
+### ProductsController in  InstantPOS.WebAPI > Controllers
+
+    // GET: api/values
+    [HttpGet]
+    public async Task<IEnumerable<ProductResponseModel>> Get(int pageNo, int pageSize)
+    {
+        var query = new FetchProductQuery() { PageNo = pageNo, PageSize = pageSize };
+        return await Mediator.Send(query);
+    }
 
 # Register Swagger 
 ### Startup.cs in IntantPOS.WebAI 

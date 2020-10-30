@@ -14,7 +14,6 @@ namespace InstantPOS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    //[Authorize(Policy = AuthorizationConsts.AdministrationPolicy)]
 
     public class ProductsController : CustomBaseApiController
     {
