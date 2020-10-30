@@ -77,7 +77,7 @@ Design Patterns
         }
     }
 
-### ProductsController.cs in InstantPOS.WebAPI.Controllers
+### ProductsController.cs in InstantPOS.WebAPI > Controllers
 
 namespace InstantPOS.WebAPI.Controllers
 {
@@ -100,7 +100,7 @@ namespace InstantPOS.WebAPI.Controllers
 
 
 
-### ProductTypesController.cs in InstantPOS.WebAPI.Controllers
+### ProductTypesController.cs in InstantPOS.WebAPI > Controllers
 
 namespace InstantPOS.WebAPI.Controllers
 {
