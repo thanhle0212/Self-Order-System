@@ -1,6 +1,6 @@
 # ASP.NET Core WebAPI, Dapper, SQLKata and IdentityServer4
 
-## Credit
+## Credit 
 This repo is a fork from [thanhle0212/Self-Order-System](https://github.com/thanhle0212/Self-Order-System).  The author Thanh Le published an excellent blog [Using Dapper and SQLKata in .NET Core for high-performance application](https://medium.com/@letienthanh0212/using-dapper-and-sqlkata-in-net-core-for-high-performance-application-716d5fd43210)
 
 ## Background
