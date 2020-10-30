@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InstantPOS.WebAPI.Controllers
 {
-    //[Authorize]
     [Authorize(Policy = AuthorizationConsts.AdministrationPolicy)]
 
     public class ProductTypesController : CustomBaseApiController
