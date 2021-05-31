@@ -62,7 +62,7 @@ pipeline {
           steps {
             powershell '''
               cd src
-              $Image = "InstantPOS:${env:BUILD_NUMBER}"
+              $Image = "instantpos-${env:BUILD_NUMBER}"
               docker build -t $Image -f InstantPOS.API/Dockerfile .
               
             '''
@@ -80,8 +80,8 @@ pipeline {
             echo 'Deploy Swarm STARTED'
 
             powershell '''
-              $Image = "InstantPOS:${env:BUILD_NUMBER}"
-              $ServiceName = "InstantPOS"
+              $Image = "instantpos-${env:BUILD_NUMBER}"
+              $ServiceName = "instantpos-svc"
               $Network = "thanhlemsa-network"
       
                 docker container prune -f
