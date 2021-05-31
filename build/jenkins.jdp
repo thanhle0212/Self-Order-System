@@ -19,19 +19,14 @@ pipeline {
             }
         }
 
-        stage("API Testing") {
+        stage("Application Testing") {
             
             steps {
 
                 bat '''
                     dotnet test tests/InstantPOS.Application.Tests/InstantPOS.Application.Tests.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=application-test-result.trx" ^
-                        /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage_application.xml" ^
+                        /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage.xml" ^
                         /p:CoverletOutputFormat=opencover ^
-
-                    dotnet test tests/InstantPOS.WebAPI.Tests/InstantPOS.WebAPI.Tests.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=api-test-result.trx" ^
-                        /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage_api.xml" ^
-                        /p:CoverletOutputFormat=opencover ^
-
                 '''
             }
 
@@ -43,15 +38,14 @@ pipeline {
             }
         }
 
-        stage("Domain Testing"){
+        stage("API Testing"){
 
             steps {
 
                 bat '''
-                    dotnet test src/Quote.Domain.Test/Quote.Domain.Test.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=domain-test-result.trx" ^
+                    dotnet test src/Quote.Domain.Test/Quote.Domain.Test.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=api-test-result.trx" ^
                         /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage.xml" ^
                         /p:CoverletOutputFormat=opencover ^
-                    /p:Exclude=\\"[xunit.*]*,[Quote.Domain.Test*]*,[Quote.Infrastructure.Common*]*,[Quote.Infrastructure.ServiceIntegration*]*,[Quote.Infrastructure.Monitoring*]*,[Quote.Infrastructure.DAL*]*,[Quote.Infrastructure.Dtos*]*,[Quote.Domain]Quote.Domain.Models.*\\"
                 '''
             }
 
@@ -99,7 +93,6 @@ pipeline {
                       docker service create --name $Using:ServiceName --replicas 3 --publish published=8088,target=80 --update-delay 7s --update-parallelism 1 --network $Using:Network $Using:Image
                   }              
                 
-
             '''
           }
 
