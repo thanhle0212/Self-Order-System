@@ -44,7 +44,7 @@ pipeline {
             steps {
 
                 bat '''
-                    dotnet test src/Quote.Domain.Test/Quote.Domain.Test.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=api-test-result.trx" ^
+                    dotnet test src/InstantPOS.WebAPI.Tests/InstantPOS.WebAPI.Tests.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=api-test-result.trx" ^
                         /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage.xml" ^
                         /p:CoverletOutputFormat=opencover ^
                 '''
