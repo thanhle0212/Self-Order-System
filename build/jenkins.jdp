@@ -1,0 +1,128 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+
+        stage("Build Project") {
+            
+            steps {
+                echo 'Build Project STARTED'
+                  dotnet build /nodereuse:false src/InstantPOS.sln 
+                '''
+            }
+
+            post {
+                failure {
+                    echo 'Build Project FAILURE'
+                }
+            }
+        }
+
+        stage("API Testing") {
+            
+            steps {
+
+                bat '''
+                    dotnet test tests/InstantPOS.Application.Tests/InstantPOS.Application.Tests.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=application-test-result.trx" ^
+                        /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage_application.xml" ^
+                        /p:CoverletOutputFormat=opencover ^
+
+                    dotnet test tests/InstantPOS.WebAPI.Tests/InstantPOS.WebAPI.Tests.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=api-test-result.trx" ^
+                        /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage_api.xml" ^
+                        /p:CoverletOutputFormat=opencover ^
+
+                '''
+            }
+
+            post{
+                
+                failure {
+                    echo 'API Testing FAILURE'
+                }
+            }
+        }
+
+        stage("Domain Testing"){
+
+            steps {
+
+                bat '''
+                    dotnet test src/Quote.Domain.Test/Quote.Domain.Test.csproj -c Debug -r ./Test-results/UnitTests -l:"trx;LogFileName=domain-test-result.trx" ^
+                        /p:CollectCoverage=true /p:CoverletOutput="Test-results/Coverage/coverage.xml" ^
+                        /p:CoverletOutputFormat=opencover ^
+                    /p:Exclude=\\"[xunit.*]*,[Quote.Domain.Test*]*,[Quote.Infrastructure.Common*]*,[Quote.Infrastructure.ServiceIntegration*]*,[Quote.Infrastructure.Monitoring*]*,[Quote.Infrastructure.DAL*]*,[Quote.Infrastructure.Dtos*]*,[Quote.Domain]Quote.Domain.Models.*\\"
+                '''
+            }
+
+            post {
+                
+                failure {
+                    echo 'Domain Testing FAILURE'
+                }
+            }
+        }
+
+        stage("Build and Publish Docker Image"){
+          steps {
+            powershell '''
+              cd src
+              $Image = "InstantPOS:${env:BUILD_NUMBER}"
+              docker build -t $Image -f InstantPOS.API/Dockerfile .
+              
+            '''
+          }
+
+          post {
+            failure {
+              echo 'Build and Publish Docker Image FAILURE'
+            }
+          }
+        }
+
+        stage("Deploy swarm"){
+          steps {
+            echo 'Deploy Swarm STARTED'
+
+            powershell '''
+              $Image = "InstantPOS:${env:BUILD_NUMBER}"
+              $ServiceName = "InstantPOS"
+              $Network = "thanhlemsa-network"
+      
+                docker container prune -f
+                docker pull $Using:Image
+                $isExisted = (docker service ls | Select-String $Using:ServiceName).Length
+                  if($isExisted -eq 1) {
+                      docker service update --image $Using:Image $Using:ServiceName
+                  }
+                  else {
+                      docker service create --name $Using:ServiceName --replicas 3 --publish published=8088,target=80 --update-delay 7s --update-parallelism 1 --network $Using:Network $Using:Image
+                  }              
+                
+
+            '''
+          }
+
+          post {
+            failure {
+              echo 'Deploy Swarm FAILURE'
+            }
+          }
+        }
+
+    }
+
+    post {
+            always {
+                mstest testResultsFile:"**/*-test-result.trx", failOnError: true, keepLongStdio: true
+            }
+
+            success {
+                echo 'Finalization SUCCESSFUL'
+            }
+
+            failure {
+                echo 'Finalization FAILURE'
+            }
+        }
+}
