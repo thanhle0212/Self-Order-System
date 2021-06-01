@@ -25,7 +25,7 @@ namespace InstantPOS.Application.Tests.Validators
         public void ShouldSuccess_When_Model_Is_Valid()
         {
             var result = _validator.Validate(_model);
-            Assert.False(result.IsValid);
+            Assert.True(result.IsValid);
         }
 
         [Theory]
