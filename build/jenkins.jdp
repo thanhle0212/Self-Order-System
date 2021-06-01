@@ -63,7 +63,7 @@ pipeline {
             powershell '''
               cd src
               $Image = "instantpos-${env:BUILD_NUMBER}"
-              docker build -t $Image -f InstantPOS.API/Dockerfile .
+              docker build -t $Image -f InstantPOS.WebAPI/Dockerfile .
               
             '''
           }
