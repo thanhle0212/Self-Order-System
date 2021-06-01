@@ -52,5 +52,10 @@ namespace InstantPOS.WebAPI.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 }
