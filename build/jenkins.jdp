@@ -61,7 +61,6 @@ pipeline {
         stage("Build and Publish Docker Image"){
           steps {
             powershell '''
-              cd src
               $Image = "instantpos-${env:BUILD_NUMBER}"
               docker build -t $Image -f src/InstantPOS.WebAPI/Dockerfile .
               
