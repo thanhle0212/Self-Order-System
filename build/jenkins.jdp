@@ -84,13 +84,12 @@ pipeline {
               $Network = "thanhlemsa-network"
       
                 docker container prune -f
-                docker pull $Using:Image
-                $isExisted = (docker service ls | Select-String $Using:ServiceName).Length
+                $isExisted = (docker service ls | Select-String $ServiceName).Length
                   if($isExisted -eq 1) {
-                      docker service update --image $Using:Image $Using:ServiceName
+                      docker service update --image $Image $ServiceName
                   }
                   else {
-                      docker service create --name $Using:ServiceName --replicas 3 --publish published=8088,target=80 --update-delay 7s --update-parallelism 1 --network $Using:Network $Using:Image
+                      docker service create --name $ServiceName --replicas 3 --publish published=8088,target=80 --update-delay 7s --update-parallelism 1 --network $Network $Image
                   }              
                 
             '''
