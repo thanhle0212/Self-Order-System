@@ -31,7 +31,7 @@ namespace InstantPOS.WebAPI.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "return value by id";
+            return "return value by id - just a sample";
         }
 
         // POST api/values
