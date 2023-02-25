@@ -37,7 +37,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="SqlKata" Version="1.1.7" />
     <PackageReference Include="SqlKata.Execution" Version="1.1.7" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstantPOS.Domain\InstantPOS.Domain.csproj" />
